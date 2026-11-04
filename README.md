@@ -2,7 +2,7 @@
 
 A reusable résumé built with Next.js App Router, strict TypeScript, and Tailwind
 CSS. Phase 1 provides the static document, Phase 2 adds subtle paper motion, and
-Phase 3 adds the owner profile disclosure. The example contains the owner's résumé across three flowing
+Phase 3 adds the owner profile disclosure. Phase 4 adds contextual project previews. The example contains the owner's résumé across three flowing
 paper sheets. All personal content lives in `src/data/resume.ts`.
 
 ## Run
@@ -84,7 +84,7 @@ resizing, and leaving the window reset the sheet. No animation dependency is nee
 
 Limits and spring tuning live in `src/lib/paper-motion.ts`. `PaperSurface` is a client boundary; résumé content is passed in as server-rendered
 children. `ProfileSection` is a separate client boundary for the owner disclosure.
-Project and experience previews remain for later phases.
+Project previews are available through a shared portal; experience previews remain for Phase 5.
 
 ## Owner profile
 
@@ -99,3 +99,25 @@ headline text is used. The panel flows within the document, while other résumé
 sections become subtly less prominent. It does not trap focus or obscure content.
 Paper motion remains still while the panel is open. Reduced-motion preferences
 disable expansion and emphasis transitions. See [Phase 3 report](docs/phase-3.md).
+
+## Project previews
+
+Hover over a project name on desktop, focus it with the keyboard, or click/tap
+to open its preview. Click pins the panel; click the name again, Close project
+preview, Escape, or outside the panel to dismiss it. Tab or ArrowDown from an
+active project enters the preview. Leaving its keyboard controls returns to the
+project name, where the next Tab continues through the résumé.
+
+One panel is shared across all project sections. It is positioned beside its
+trigger where space permits, clamped within the viewport, and uses a bottom sheet
+on narrow screens. The panel lives outside the paper transform, and paper motion
+pauses while it is open. Hover exit has a short grace period to cross into it.
+
+Previews prefer `detailedDescription`, then `description`, and show technology
+tags. Optional `image` or the first `gallery` image is displayed; absent or failed
+images use a text-only cover. Valid `githubUrl`, `liveUrl`, and `demoVideo` fields
+produce real external links. Video URLs open separately to support hosted video
+pages without embedding assumptions. Missing URLs never produce disabled actions.
+The example content intentionally has no invented project media or URLs.
+
+See [Phase 4 report](docs/phase-4.md) for implementation and verification details.

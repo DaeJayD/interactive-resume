@@ -71,7 +71,8 @@ export function PaperSurface({ children }: { children: ReactNode }) {
         event.pointerType !== "mouse" ||
         pressed ||
         frame!.contains(document.activeElement) ||
-        frame!.querySelector('[data-profile-open="true"]')
+        frame!.querySelector('[data-profile-open="true"]') ||
+        frame!.closest('[data-project-preview-open="true"]')
       )
         return;
       if (window.getSelection()?.isCollapsed === false) return;
@@ -115,6 +116,7 @@ export function PaperSurface({ children }: { children: ReactNode }) {
     window.addEventListener("pointerup", up);
     window.addEventListener("scroll", reset, { passive: true });
     window.addEventListener("resize", reset);
+    window.addEventListener("projectpreviewchange", reset);
     window.addEventListener("blur", blur);
     document.addEventListener("visibilitychange", visibility);
     preference.addEventListener("change", reset);
@@ -129,6 +131,7 @@ export function PaperSurface({ children }: { children: ReactNode }) {
       window.removeEventListener("pointerup", up);
       window.removeEventListener("scroll", reset);
       window.removeEventListener("resize", reset);
+      window.removeEventListener("projectpreviewchange", reset);
       window.removeEventListener("blur", blur);
       document.removeEventListener("visibilitychange", visibility);
       preference.removeEventListener("change", reset);

@@ -5,6 +5,7 @@ import { SkillsSection } from "./SkillsSection";
 import { EducationSection } from "./EducationSection";
 import { ExperienceSection } from "./ExperienceSection";
 import { ProjectsSection } from "./ProjectsSection";
+import { ProjectPreviewProvider } from "./ProjectPreview";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { ResumeConfiguration, ResumeSection } from "@/types/resume";
 
@@ -93,34 +94,36 @@ export function ResumeDocument({ resume }: { resume: ResumeConfiguration }) {
     "--paper": safeColor(resume.theme?.paper),
   } as CSSProperties;
   return (
-    <article
-      className="resume-document"
-      aria-labelledby="resume-name"
-      style={style}
-      data-typography={resume.theme?.typography ?? "editorial"}
-    >
-      {pages.map((page, index) => (
-        <ResumePage
-          key={page.id}
-          number={index + 1}
-          total={pages.length}
-          name={resume.profile.fullName}
-        >
-          {index === 0 && <ResumeHeader profile={resume.profile} />}
-          {page.rendered.map(({ section, content }) => (
-            <section
-              key={section.id}
-              aria-labelledby={`${page.id}-${section.id}`}
-              className="resume-section"
-            >
-              <SectionHeading id={`${page.id}-${section.id}`}>
-                {section.title}
-              </SectionHeading>
-              {content}
-            </section>
-          ))}
-        </ResumePage>
-      ))}
-    </article>
+    <ProjectPreviewProvider themeStyle={style}>
+      <article
+        className="resume-document"
+        aria-labelledby="resume-name"
+        style={style}
+        data-typography={resume.theme?.typography ?? "editorial"}
+      >
+        {pages.map((page, index) => (
+          <ResumePage
+            key={page.id}
+            number={index + 1}
+            total={pages.length}
+            name={resume.profile.fullName}
+          >
+            {index === 0 && <ResumeHeader profile={resume.profile} />}
+            {page.rendered.map(({ section, content }) => (
+              <section
+                key={section.id}
+                aria-labelledby={`${page.id}-${section.id}`}
+                className="resume-section"
+              >
+                <SectionHeading id={`${page.id}-${section.id}`}>
+                  {section.title}
+                </SectionHeading>
+                {content}
+              </section>
+            ))}
+          </ResumePage>
+        ))}
+      </article>
+    </ProjectPreviewProvider>
   );
 }
