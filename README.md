@@ -1,7 +1,7 @@
 # Interactive Living Résumé
 
-Phase 1: a reusable static résumé built with Next.js App Router, strict TypeScript,
-and Tailwind CSS. The example contains the owner's résumé across three flowing
+A reusable résumé built with Next.js App Router, strict TypeScript, and Tailwind
+CSS. Phase 1 provides the static document; Phase 2 adds subtle paper motion. The example contains the owner's résumé across three flowing
 paper sheets. All personal content lives in `src/data/resume.ts`.
 
 ## Run
@@ -62,10 +62,25 @@ src/
     ui/                 # section heading and safe external link
   data/resume.ts        # owner content and page composition
   lib/links.ts          # external URL validation
+  lib/paper-motion.ts   # bounded spring model and transform limits
   types/resume.ts       # reusable content schema
 tests/resume.test.tsx    # rendering and missing-data regressions
+tests/paper-motion.test.tsx # spring stability and motion limits
 docs/phase-1.md         # completion report and Phase 2 handoff
 ```
 
 See [Phase 1 report](docs/phase-1.md) for component roles, validation evidence,
-content provenance, limitations, and the next phase. Phase 2 motion is not implemented.
+content provenance and the static foundation. See [Phase 2 report](docs/phase-2.md)
+for paper motion, validation, and the next phase.
+
+## Paper motion
+
+On wide screens with a fine mouse pointer, each sheet follows the cursor with
+small spring-smoothed translation, perspective tilt, and a shifting shadow.
+Motion remains static on touch and narrow screens, under reduced-motion
+preferences, while selecting text, and while links have keyboard focus. Scrolling,
+resizing, and leaving the window reset the sheet. No animation dependency is needed.
+
+Limits and spring tuning live in `src/lib/paper-motion.ts`. `PaperSurface` is the
+only client component; the résumé content is passed in as server-rendered children.
+Profile focus and project/experience previews remain for later phases.
