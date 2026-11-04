@@ -1,10 +1,12 @@
 import { ResumeDocument } from "@/components/resume/ResumeDocument";
 import { resume } from "@/data/resume";
-
 export default function Home() {
   return (
-    <main>
-      <p className="workspace-label">Living Résumé / Sample document</p>
+    <main id="resume">
+      <div className="workspace-label">
+        <span>Living résumé</span>
+        <span>Professional record</span>
+      </div>
       <ResumeDocument resume={resume} />
     </main>
   );
