@@ -11,6 +11,20 @@ export const resume: ResumeConfiguration = {
     location: "Cagayan de Oro City, Philippines",
     email: "donos.daejay11@gmail.com",
     phone: "+63 976 262 8316",
+    biography:
+      "My work spans backend development, mobile applications, and booking systems. During my OJT at Appollotech Software, I contributed to Java and Spring Boot APIs for Asenso V2, worked on Docker containerization, and supported Kubernetes deployment tasks.\n\nI also bring experience in Excel data preparation and validation, alongside customer service work at Creamery Studios and client service and booking system development for a fashion business.",
+    details: [
+      {
+        id: "education",
+        label: "Education",
+        value: "Bachelor of Science in Computer Science · USTP",
+      },
+      {
+        id: "location",
+        label: "Based in",
+        value: "Cagayan de Oro City, Philippines",
+      },
+    ],
     socialLinks: [
       {
         id: "github",

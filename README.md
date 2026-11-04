@@ -1,7 +1,8 @@
 # Interactive Living Résumé
 
 A reusable résumé built with Next.js App Router, strict TypeScript, and Tailwind
-CSS. Phase 1 provides the static document; Phase 2 adds subtle paper motion. The example contains the owner's résumé across three flowing
+CSS. Phase 1 provides the static document, Phase 2 adds subtle paper motion, and
+Phase 3 adds the owner profile disclosure. The example contains the owner's résumé across three flowing
 paper sheets. All personal content lives in `src/data/resume.ts`.
 
 ## Run
@@ -81,6 +82,20 @@ Motion remains static on touch and narrow screens, under reduced-motion
 preferences, while selecting text, and while links have keyboard focus. Scrolling,
 resizing, and leaving the window reset the sheet. No animation dependency is needed.
 
-Limits and spring tuning live in `src/lib/paper-motion.ts`. `PaperSurface` is the
-only client component; the résumé content is passed in as server-rendered children.
-Profile focus and project/experience previews remain for later phases.
+Limits and spring tuning live in `src/lib/paper-motion.ts`. `PaperSurface` is a client boundary; résumé content is passed in as server-rendered
+children. `ProfileSection` is a separate client boundary for the owner disclosure.
+Project and experience previews remain for later phases.
+
+## Owner profile
+
+Hover over the name or optional portrait, or focus the name with the keyboard, to
+read more about the owner. Click or tap the name to keep the panel open. Use the
+name again, Close profile, Escape, or an outside click to dismiss it. Closing from
+inside the panel returns keyboard focus to the name.
+
+Profile content comes from `profile.biography`, `profile.shortSummary`, optional
+`details`, and valid `socialLinks`. If biography is missing, existing summary or
+headline text is used. The panel flows within the document, while other résumé
+sections become subtly less prominent. It does not trap focus or obscure content.
+Paper motion remains still while the panel is open. Reduced-motion preferences
+disable expansion and emphasis transitions. See [Phase 3 report](docs/phase-3.md).

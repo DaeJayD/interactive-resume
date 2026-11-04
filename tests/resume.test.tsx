@@ -19,7 +19,10 @@ const render = (value: ResumeConfiguration) =>
 test("minimal profile renders without optional collections, contacts, or media", () => {
   const html = render(minimal);
   assert.match(html, /Example Designer/);
-  assert.doesNotMatch(html, /<h2|mailto:|tel:|undefined|<img/);
+  assert.doesNotMatch(
+    html,
+    /class="resume-section"|mailto:|tel:|undefined|<img/,
+  );
   assert.equal((html.match(/class="paper"/g) || []).length, 1);
 });
 test("reference dataset includes every configured project and experience", () => {

@@ -1,27 +1,11 @@
-import Image from "next/image";
+import { ProfileSection } from "./ProfileSection";
 import type { Profile } from "@/types/resume";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 
 export function ResumeHeader({ profile }: { profile: Profile }) {
   return (
     <header className="resume-header" data-profile-id={profile.id}>
-      <div className="profile-heading">
-        <div>
-          <p className="eyebrow">Curriculum vitae</p>
-          <h1 id="resume-name">{profile.fullName}</h1>
-          <p className="headline">{profile.headline}</p>
-        </div>
-        {profile.image && (
-          <Image
-            className="profile-image"
-            src={profile.image.src}
-            alt={profile.image.alt}
-            width={88}
-            height={88}
-            unoptimized
-          />
-        )}
-      </div>
+      <ProfileSection profile={profile} />
       <address className="contact">
         {profile.location && <span>{profile.location}</span>}
         {profile.email && (
