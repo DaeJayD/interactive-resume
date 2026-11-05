@@ -144,3 +144,12 @@ See [Phase 5 report](docs/phase-5.md) for validation and the Phase 6 handoff.
 Use the numbered links to jump to a sheet or the Previous and Next links at its
 foot. The current page follows the reading position. Each sheet has a
 shareable fragment such as `#resume-page-2`. See [Phase 6 report](docs/phase-6.md).
+
+## Print and release
+
+Choose **Print / Save PDF** and select your browser's PDF destination. The
+print stylesheet uses A4 with page breaks between résumé sheets and hides
+the interactive controls.
+
+The production site is [daejayd-resume.vercel.app](https://daejayd-resume.vercel.app/).
+See the [Phase 7 release notes](docs/phase-7.md) for validation and deployment details.

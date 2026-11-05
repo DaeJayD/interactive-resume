@@ -149,15 +149,25 @@ export function ResumePreviewProvider({
           : next,
       );
     }
+    let frame = 0;
+    function schedulePlacement() {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        place();
+      });
+    }
+
     place();
-    const observer = new ResizeObserver(place);
+    const observer = new ResizeObserver(schedulePlacement);
     if (panelRef.current) observer.observe(panelRef.current);
-    window.addEventListener("resize", place);
-    window.addEventListener("scroll", place, true);
+    window.addEventListener("resize", schedulePlacement);
+    window.addEventListener("scroll", schedulePlacement, true);
     return () => {
       observer.disconnect();
-      window.removeEventListener("resize", place);
-      window.removeEventListener("scroll", place, true);
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", schedulePlacement);
+      window.removeEventListener("scroll", schedulePlacement, true);
     };
   }, [selection, close]);
 
