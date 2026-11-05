@@ -5,7 +5,7 @@ import { SkillsSection } from "./SkillsSection";
 import { EducationSection } from "./EducationSection";
 import { ExperienceSection } from "./ExperienceSection";
 import { ProjectsSection } from "./ProjectsSection";
-import { ProjectPreviewProvider } from "./ProjectPreview";
+import { ResumePreviewProvider } from "./ContextualPreview";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { ResumeConfiguration, ResumeSection } from "@/types/resume";
 
@@ -94,7 +94,7 @@ export function ResumeDocument({ resume }: { resume: ResumeConfiguration }) {
     "--paper": safeColor(resume.theme?.paper),
   } as CSSProperties;
   return (
-    <ProjectPreviewProvider themeStyle={style}>
+    <ResumePreviewProvider themeStyle={style}>
       <article
         className="resume-document"
         aria-labelledby="resume-name"
@@ -124,6 +124,6 @@ export function ResumeDocument({ resume }: { resume: ResumeConfiguration }) {
           </ResumePage>
         ))}
       </article>
-    </ProjectPreviewProvider>
+    </ResumePreviewProvider>
   );
 }

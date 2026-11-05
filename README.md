@@ -2,7 +2,7 @@
 
 A reusable résumé built with Next.js App Router, strict TypeScript, and Tailwind
 CSS. Phase 1 provides the static document, Phase 2 adds subtle paper motion, and
-Phase 3 adds the owner profile disclosure. Phase 4 adds contextual project previews. The example contains the owner's résumé across three flowing
+Phase 3 adds the owner profile disclosure. Phase 4 adds contextual project previews; Phase 5 adds professional experience previews. The example contains the owner's résumé across three flowing
 paper sheets. All personal content lives in `src/data/resume.ts`.
 
 ## Run
@@ -84,7 +84,7 @@ resizing, and leaving the window reset the sheet. No animation dependency is nee
 
 Limits and spring tuning live in `src/lib/paper-motion.ts`. `PaperSurface` is a client boundary; résumé content is passed in as server-rendered
 children. `ProfileSection` is a separate client boundary for the owner disclosure.
-Project previews are available through a shared portal; experience previews remain for Phase 5.
+Project and experience previews share one contextual portal and interaction controller.
 
 ## Owner profile
 
@@ -108,7 +108,7 @@ preview, Escape, or outside the panel to dismiss it. Tab or ArrowDown from an
 active project enters the preview. Leaving its keyboard controls returns to the
 project name, where the next Tab continues through the résumé.
 
-One panel is shared across all project sections. It is positioned beside its
+One panel is shared across all project and experience sections. It is positioned beside its
 trigger where space permits, clamped within the viewport, and uses a bottom sheet
 on narrow screens. The panel lives outside the paper transform, and paper motion
 pauses while it is open. Hover exit has a short grace period to cross into it.
@@ -121,3 +121,19 @@ pages without embedding assumptions. Missing URLs never produce disabled actions
 The example content intentionally has no invented project media or URLs.
 
 See [Phase 4 report](docs/phase-4.md) for implementation and verification details.
+
+## Experience previews
+
+Activate a job title by hover, focus, click, or tap to inspect the employer, role,
+known dates, summary, responsibilities, and optional technologies. A company link
+appears only when `companyWebsite` is a valid absolute web URL. Optional
+`previewImage` includes alternative text and falls back safely on load failure.
+Missing dates remain absent; a start year alone does not imply current employment.
+
+`ContextualPreview.tsx` supplies the shared trigger, portal, focus restoration,
+dismissal, and desktop/mobile positioning for both preview types. Pure placement
+logic lives in `src/lib/preview-position.ts`; content stays in the corresponding
+project or experience component. One active panel prevents overlapping previews.
+The sticky heading keeps dismissal accessible during long professional details.
+
+See [Phase 5 report](docs/phase-5.md) for validation and the Phase 6 handoff.

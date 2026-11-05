@@ -1,16 +1,11 @@
+import { ResumePreviewProvider } from "../src/components/resume/ContextualPreview";
+import { previewPosition } from "../src/lib/preview-position";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { renderToStaticMarkup } from "react-dom/server";
 import { ProjectPreviewContent } from "../src/components/resume/ProjectPreviewContent";
-import {
-  ProjectPreviewProvider,
-  ProjectTrigger,
-} from "../src/components/resume/ProjectPreview";
-import {
-  previewPosition,
-  projectDescription,
-  projectLinks,
-} from "../src/lib/project-preview";
+import { ProjectTrigger } from "../src/components/resume/ProjectPreview";
+import { projectDescription, projectLinks } from "../src/lib/project-preview";
 import type { Project } from "../src/types/resume";
 
 const minimal: Project = { id: "study", name: "Design study", featured: false };
@@ -90,9 +85,9 @@ test("preview placement stays inside desktop and short viewports", () => {
 });
 test("server rendering preserves usable document content and collapsed triggers", () => {
   const html = renderToStaticMarkup(
-    <ProjectPreviewProvider>
+    <ResumePreviewProvider>
       <ProjectTrigger project={minimal} />
-    </ProjectPreviewProvider>,
+    </ResumePreviewProvider>,
   );
   assert.match(html, /aria-haspopup="dialog"/);
   assert.match(html, /aria-expanded="false"/);

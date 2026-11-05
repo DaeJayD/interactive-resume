@@ -16,7 +16,7 @@ export function ProjectPreviewContent({ project }: { project: Project }) {
     <>
       {image && !imageFailed ? (
         <Image
-          className="project-preview-image"
+          className="entry-preview-image"
           src={image.src}
           alt={image.alt}
           width={640}
@@ -25,16 +25,14 @@ export function ProjectPreviewContent({ project }: { project: Project }) {
           onError={() => setImageFailed(true)}
         />
       ) : (
-        <div className="project-preview-text-cover">
+        <div className="entry-preview-text-cover">
           <span>Project overview</span>
           <span>{project.status || "Selected work"}</span>
         </div>
       )}
-      <p className="project-preview-description">
-        {projectDescription(project)}
-      </p>
+      <p className="entry-preview-description">{projectDescription(project)}</p>
       {!!project.technologies?.length && (
-        <ul className="project-preview-tags" aria-label="Technologies">
+        <ul className="entry-preview-tags" aria-label="Technologies">
           {project.technologies.map((technology, index) => (
             <li key={`${technology}-${index}`}>{technology}</li>
           ))}
@@ -42,7 +40,7 @@ export function ProjectPreviewContent({ project }: { project: Project }) {
       )}
       {(links.length > 0 || video) && (
         <nav
-          className="project-preview-links"
+          className="entry-preview-links"
           aria-label={`${project.name} links`}
         >
           {links.map((link) => (

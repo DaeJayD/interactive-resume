@@ -415,7 +415,7 @@ li + li {
   font-size: 11px;
   margin-top: 8px;
 }
-.project-trigger {
+.entry-trigger {
   border: 0;
   padding: 4px 0;
   background: none;
@@ -428,19 +428,19 @@ li + li {
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
 }
-.project-trigger:hover {
+.entry-trigger:hover {
   color: var(--accent);
 }
-.project-trigger-cue {
+.entry-trigger-cue {
   display: inline-block;
   margin-left: 8px;
   font-size: 12px;
   color: var(--accent);
 }
-.project-preview-root[data-project-preview-open="true"] .paper {
+.resume-preview-root[data-preview-open="true"] .paper {
   transform: none;
 }
-.project-preview {
+.entry-preview {
   position: fixed;
   z-index: 20;
   width: min(360px, calc(100vw - 32px));
@@ -459,17 +459,22 @@ li + li {
   overflow-wrap: anywhere;
   animation: preview-enter 150ms ease-out;
 }
-.project-preview-heading {
+.entry-preview-heading {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--paper, #fffef9);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 6px;
+  padding-bottom: 12px;
 }
-.project-preview-heading .eyebrow {
+.entry-preview-heading .eyebrow {
   margin-bottom: 9px;
 }
-.project-preview-heading h2 {
+.entry-preview-heading h2 {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 26px;
   font-weight: 400;
@@ -488,7 +493,7 @@ li + li {
   font-size: 24px;
   cursor: pointer;
 }
-.project-preview-text-cover {
+.entry-preview-text-cover {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -498,16 +503,16 @@ li + li {
   color: #465543;
   margin-bottom: 18px;
 }
-.project-preview-text-cover span:first-child {
+.entry-preview-text-cover span:first-child {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
-.project-preview-text-cover span:last-child {
+.entry-preview-text-cover span:last-child {
   font-size: 12px;
   line-height: 1.6;
 }
-.project-preview-image {
+.entry-preview-image {
   width: 100%;
   height: auto;
   max-height: 220px;
@@ -515,12 +520,12 @@ li + li {
   background: #edf0e9;
   margin-bottom: 18px;
 }
-.project-preview-description {
+.entry-preview-description {
   font-size: 13px;
   line-height: 1.8;
   white-space: pre-line;
 }
-.project-preview-tags {
+.entry-preview-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -528,7 +533,7 @@ li + li {
   margin: 18px 0 0;
   list-style: none;
 }
-.project-preview-tags li {
+.entry-preview-tags li {
   margin: 0;
   padding: 4px 8px;
   background: #edf0e9;
@@ -536,12 +541,49 @@ li + li {
   font-size: 10px;
   line-height: 1.5;
 }
-.project-preview-links {
+.entry-preview-links {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 18px;
   margin-top: 20px;
   font-size: 12px;
+}
+.experience-preview-employer {
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.experience-preview-meta {
+  margin: 0 0 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d9dfd5;
+  display: grid;
+  gap: 8px;
+}
+.experience-preview-meta > div {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 12px;
+}
+.experience-preview-meta dt,
+.experience-preview-meta dd {
+  font-size: 11px;
+  line-height: 1.7;
+}
+.experience-preview-duties h3 {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.experience-preview-duties li {
+  font-size: 12px;
+  line-height: 1.8;
+}
+.entry-preview-description + .experience-preview-duties {
+  margin-top: 18px;
 }
 @keyframes preview-enter {
   from {
@@ -554,10 +596,10 @@ li + li {
   }
 }
 @media (max-width: 700px) {
-  .project-trigger {
+  .entry-trigger {
     min-height: 44px;
   }
-  .project-preview {
+  .entry-preview {
     left: 12px !important;
     right: 12px;
     top: auto !important;
@@ -568,18 +610,18 @@ li + li {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .project-preview {
+  .entry-preview {
     animation: none;
   }
 }
 @media print {
-  .project-preview {
+  .entry-preview {
     display: none;
   }
-  .project-trigger {
+  .entry-trigger {
     text-decoration: none;
   }
-  .project-trigger-cue {
+  .entry-trigger-cue {
     display: none;
   }
 }
