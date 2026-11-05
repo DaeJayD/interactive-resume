@@ -137,3 +137,10 @@ project or experience component. One active panel prevents overlapping previews.
 The sticky heading keeps dismissal accessible during long professional details.
 
 See [Phase 5 report](docs/phase-5.md) for validation and the Phase 6 handoff.
+
+
+## Page navigation
+
+Use the numbered links to jump to a sheet or the Previous and Next links at its
+foot. The current page follows the reading position. Each sheet has a
+shareable fragment such as `#resume-page-2`. See [Phase 6 report](docs/phase-6.md).

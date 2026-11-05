@@ -13,7 +13,12 @@ export function ResumePage({
 }) {
   return (
     <PaperSurface>
-      <section className="page-content" aria-label={`Résumé page ${number}`}>
+      <section
+        id={`resume-page-${number}`}
+        tabIndex={-1}
+        className="page-content"
+        aria-label={`Résumé page ${number}`}
+      >
         {number > 1 && (
           <div className="continuation">
             <span>{name}</span>
@@ -27,6 +32,16 @@ export function ResumePage({
             {String(number).padStart(2, "0")} / {String(total).padStart(2, "0")}
           </span>
         </footer>
+        {total > 1 && (
+          <nav className="page-steps" aria-label={`Page ${number} navigation`}>
+            {number > 1 && (
+              <a href={`#resume-page-${number - 1}`}>← Previous page</a>
+            )}
+            {number < total && (
+              <a href={`#resume-page-${number + 1}`}>Next page →</a>
+            )}
+          </nav>
+        )}
       </section>
     </PaperSurface>
   );

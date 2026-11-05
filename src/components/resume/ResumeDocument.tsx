@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import { ResumeHeader } from "./ResumeHeader";
 import { ResumePage } from "./ResumePage";
+import { PageNavigation } from "./PageNavigation";
 import { SkillsSection } from "./SkillsSection";
 import { EducationSection } from "./EducationSection";
 import { ExperienceSection } from "./ExperienceSection";
@@ -95,6 +96,7 @@ export function ResumeDocument({ resume }: { resume: ResumeConfiguration }) {
   } as CSSProperties;
   return (
     <ResumePreviewProvider themeStyle={style}>
+      {pages.length > 1 && <PageNavigation total={pages.length} />}
       <article
         className="resume-document"
         aria-labelledby="resume-name"
