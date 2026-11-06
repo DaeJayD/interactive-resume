@@ -110,15 +110,6 @@ export const resume: ResumeConfiguration = {
   ],
   projects: [
     {
-      id: "remittance",
-      name: "Remittance Simulator",
-      description:
-        "Java and Spring Boot project specification with MariaDB, focused on persistent transaction state, gateway-specific API responses, and Flutter client integration.",
-      technologies: ["Java", "Spring Boot", "MariaDB", "Flutter"],
-      status: "Project specification",
-      featured: true,
-    },
-    {
       id: "vasenizz",
       name: "VaseNizz POS",
       description:
@@ -173,38 +164,12 @@ export const resume: ResumeConfiguration = {
       featured: false,
     },
     {
-      id: "rererecon",
-      name: "RERERECON",
-      description:
-        "Research proposal for query-condition-aware routing in sparse RAG, separating clarification decisions from automatic query transformation and defining an evaluation protocol.",
-      status: "Undergraduate thesis proposal",
-      featured: false,
-    },
-    {
       id: "calorie",
       name: "Daily Calorie Calculator",
       description:
         "BMI-based calculator for estimating daily calorie requirements using personal and activity inputs.",
       technologies: ["Python"],
       status: "Completed prototype · 2024",
-      featured: false,
-    },
-    {
-      id: "thryft",
-      name: "ThryfT",
-      description:
-        "Early mobile marketplace for pre-loved items in Cagayan de Oro, including listing, seller, and local-discovery flows.",
-      technologies: ["Flutter", "Dart", "MongoDB"],
-      status: "Discontinued prototype · 2024",
-      featured: false,
-    },
-    {
-      id: "lyte",
-      name: "LYTE",
-      description:
-        "Object-oriented desktop fitness planning module with reusable components for routines and progress tracking.",
-      technologies: ["Java"],
-      status: "Discontinued project · 2024",
       featured: false,
     },
     { id: "finance", name: "Finance Tracker", featured: false },
@@ -232,7 +197,7 @@ export const resume: ResumeConfiguration = {
           id: "selected-projects",
           kind: "projects",
           title: "Selected software projects",
-          itemIds: ["remittance", "vasenizz", "ryser", "lumiere"],
+          itemIds: ["vasenizz", "ryser", "lumiere"],
         },
         {
           id: "professional-experience",
@@ -249,16 +214,7 @@ export const resume: ResumeConfiguration = {
           id: "additional-projects",
           kind: "projects",
           title: "Additional software projects",
-          itemIds: [
-            "boardr",
-            "arcana",
-            "roadready",
-            "rererecon",
-            "calorie",
-            "thryft",
-            "lyte",
-            "finance",
-          ],
+          itemIds: ["boardr", "arcana", "roadready", "calorie", "finance"],
         },
       ],
     },

@@ -15,6 +15,19 @@ export function PaperSurface({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const frame = frameRef.current;
+    if (!frame || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        frame.setAttribute("data-entered", "true");
+        observer.disconnect();
+      }
+    }, { threshold: 0.05 });
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const frame = frameRef.current;
     const paper = paperRef.current;
     if (!frame || !paper) return;
 
@@ -30,6 +43,8 @@ export function PaperSurface({ children }: { children: ReactNode }) {
     function draw() {
       const style = paperStyle(state.position);
       paper!.style.setProperty("--paper-transform", style.transform);
+      paper!.style.setProperty("--light-x", `${50 + state.position.x * 24}%`);
+      paper!.style.setProperty("--light-y", `${25 + state.position.y * 18}%`);
       frame!.style.setProperty("--shadow-transform", style.shadowTransform);
       frame!.style.setProperty("--shadow-opacity", style.shadowOpacity);
     }
@@ -40,6 +55,8 @@ export function PaperSurface({ children }: { children: ReactNode }) {
       state = restingPaper();
       target = { x: 0, y: 0 };
       paper!.style.removeProperty("--paper-transform");
+      paper!.style.removeProperty("--light-x");
+      paper!.style.removeProperty("--light-y");
       frame!.style.removeProperty("--shadow-transform");
       frame!.style.removeProperty("--shadow-opacity");
       frame!.removeAttribute("data-moving");
