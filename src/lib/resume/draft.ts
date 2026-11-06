@@ -2,8 +2,8 @@ import "server-only";
 import { requireResumeOwner } from "./owner";
 import { resumeSchema } from "./schema";
 
-export async function loadResumeDraft() {
-  const client = await requireResumeOwner();
+export async function loadResumeDraft(ownerClient?: Awaited<ReturnType<typeof requireResumeOwner>>) {
+  const client = ownerClient ?? await requireResumeOwner();
   const { data, error } = await client
     .from("resume_drafts")
     .select("document, schema_version, revision")

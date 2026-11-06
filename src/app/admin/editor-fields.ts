@@ -13,7 +13,7 @@ const lines = (key: string, label: string): Field => ({ key, label, kind: "lines
 const object = (key: string, label: string, fields: Field[]): Field => ({ key, label, kind: "object", fields });
 const list = (key: string, label: string, fields: Field[]): Field => ({ key, label, kind: "list", fields });
 const choice = (key: string, label: string, options: string[]): Field => ({ key, label, kind: "choice", options });
-const image = [text("src", "Image URL or local path"), text("alt", "Alt text")];
+const image = [text("src", "Image reference, URL, or local path"), text("alt", "Alt text")];
 const dates = [text("startDate", "Start date"), text("endDate", "End date")];
 
 export const sectionCollections = {

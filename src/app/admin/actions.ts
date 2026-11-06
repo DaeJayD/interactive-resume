@@ -68,6 +68,9 @@ export async function saveDraft(revision: number, payload: string) {
     expected_revision: revision,
     next_document: parsed.data,
   });
+  if (error?.code === "23514") {
+    return { status: "error", message: "A referenced image is unavailable. Check the media library before saving." } as const;
+  }
   if (error) return { status: "error", message: "Could not save the draft. Try again." } as const;
   if (data === null) return { status: "conflict" } as const;
   return { status: "saved", revision: data as number, document: parsed.data } as const;

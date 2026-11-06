@@ -235,6 +235,8 @@ export function DraftEditor({ initial, initialRevision }: { initial: ResumeConfi
       <div className="my-4 flex flex-wrap items-center gap-3">
         <p>Revision {revision} · {dirty ? "Unsaved changes" : "Saved"}</p>
         <a href="/admin/preview" target="_blank" rel="noreferrer">Preview saved draft ↗</a>
+        <a href="/admin/history" target="_blank" rel="noreferrer">Publication history ↗</a>
+        <a href="/admin/media" target="_blank" rel="noreferrer">Media library ↗</a>
         <form action={signOut} onSubmit={(event) => {
           if (dirty && !window.confirm("Sign out and discard unsaved changes?")) event.preventDefault();
         }}>
