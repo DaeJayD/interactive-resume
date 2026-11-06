@@ -41,3 +41,34 @@ export async function importResume() {
   if (error && error.code !== "23505") throw new Error("Could not import résumé");
   redirect("/admin");
 }
+
+export async function saveDraft(revision: number, payload: string) {
+  const client = await requireResumeOwner();
+  if (!Number.isSafeInteger(revision) || revision < 1 || revision >= 2147483647 ||
+      typeof payload !== "string" || new TextEncoder().encode(payload).length > 400000) {
+    return { status: "error", message: "Invalid revision or draft exceeds 400 KB." } as const;
+  }
+
+  let input: unknown;
+  try {
+    input = JSON.parse(payload);
+  } catch {
+    return { status: "error", message: "Could not read the draft." } as const;
+  }
+
+  const parsed = resumeSchema.safeParse(input);
+  if (!parsed.success) {
+    return {
+      status: "invalid",
+      issues: parsed.error.issues.map(({ path, message }) => ({ path: path.join("."), message })),
+    } as const;
+  }
+
+  const { data, error } = await client.rpc("save_resume_draft", {
+    expected_revision: revision,
+    next_document: parsed.data,
+  });
+  if (error) return { status: "error", message: "Could not save the draft. Try again." } as const;
+  if (data === null) return { status: "conflict" } as const;
+  return { status: "saved", revision: data as number, document: parsed.data } as const;
+}
