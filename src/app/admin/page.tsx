@@ -1,6 +1,7 @@
 import { loadResumeDraft } from "@/lib/resume/draft";
 import { importResume, signOut } from "./actions";
 import { DraftEditor } from "./DraftEditor";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -8,8 +9,11 @@ export default async function AdminPage() {
   const draft = await loadResumeDraft();
 
   return (
-    <main className="mx-auto max-w-2xl">
+    <main id="resume" tabIndex={-1} className="mx-auto max-w-2xl">
       <h1>Résumé admin</h1>
+      <Link href="/admin/backup" target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm">
+        Draft backup ↗
+      </Link>
       {draft.status === "ready" ? (
         <DraftEditor initial={draft.document} initialRevision={draft.revision} />
       ) : (
