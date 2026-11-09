@@ -25,3 +25,24 @@ to an available image in the connected project.
    keeps the current publication until the restored draft is published.
 6. Check narrow and wide layouts, keyboard navigation, reduced motion, and
    the pagination of a saved PDF.
+
+## Release verification
+
+- On the hosted Supabase development project, temporary accounts verified
+  owner sign-in, access denial for another signed-in user, draft saves,
+  and rejection of a stale revision.
+- A test image stayed private until publication. The public copy loaded after
+  publishing and remained available for the older version. Retrying a
+  publication preserved the current version, and restoring a prior version
+  created a draft while the current publication stayed live.
+- The test accounts, images, drafts, and versions were removed. A readback
+  confirmed the hosted project was empty after the check.
+- The app connected to the hosted backend locally. Anonymous admin requests
+  redirected to login, a private image request returned 404, and the public
+  route rendered the bundled résumé before the first publication.
+- Chrome printed the bundled résumé as three A4 pages. Visual inspection
+  confirmed that the content fit each page and the screen controls were absent.
+
+Production still needs an owner registration, public signup disabled, and
+the two Supabase environment variables. After setup, verify the owner's
+workflow and the public page on the production deployment.
